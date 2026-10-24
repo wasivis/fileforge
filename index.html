@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Primary SEO Metadata -->
+  <title>FileForge — Fast, Offline Batch File Converter for Desktop</title>
+  <meta name="title" content="FileForge — Fast, Offline Batch File Converter for Desktop">
+  <meta name="description" content="FileForge is a lightweight, 100% offline desktop application for lightning-fast batch file conversion across images, audio, video, and documents. Zero cloud dependencies. Your data never leaves your device.">
+  <meta name="keywords" content="file converter, batch converter, offline file converter, desktop conversion app, image converter, video converter, audio converter, PDF tool, privacy file converter">
+  <meta name="author" content="FileForge">
+  <meta name="robots" content="index, follow">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://fileforge.app/">
+  <meta property="og:title" content="FileForge — Fast, Offline Batch File Converter">
+  <meta property="og:description" content="Convert hundreds of images, audio, video, and document files instantly on your desktop. 100% private, offline, and blazing fast.">
+  <meta property="og:image" content="images/fileforge.png">
+
+  <!-- Twitter Card -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://fileforge.app/">
+  <meta property="twitter:title" content="FileForge — Fast, Offline Batch File Converter">
+  <meta property="twitter:description" content="Convert hundreds of images, audio, video, and document files instantly on your desktop. 100% private, offline, and blazing fast.">
+  <meta property="twitter:image" content="images/fileforge.png">
+
+  <!-- JSON-LD Schema.org Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "FileForge",
+    "operatingSystem": "Windows 10, Windows 11, macOS, Linux",
+    "applicationCategory": "UtilitiesApplication",
+    "offers": {
+      "@type": "Offer",
+      "price": "19.00",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock"
+    },
+    "description": "A high-performance, 100% offline desktop file converter utility for images, documents, audio, and video batches.",
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.9",
+      "ratingCount": "128"
+    }
+  }
+  </script>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            bgDark: '#121417',
+            cardDark: '#181B20',
+            borderDark: '#282D35',
+            accent: '#6D4AFF',
+            accentHover: '#7C5CFC',
+            accentLight: '#A288FF',
+            textMuted: '#9CA3AF',
+          },
+          fontFamily: {
+            sans: ['Inter', 'Segoe UI', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      background-color: #121417;
+      color: #E5E7EB;
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+    }
+    .glow-effect {
+      position: absolute;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(109, 74, 255, 0.15) 0%, rgba(18, 20, 23, 0) 70%);
+      top: -100px;
+      left: 50%;
+      transform: translateX(-50%);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .card-border {
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      transition: all 0.25s ease;
+    }
+    .card-border:hover {
+      border-color: rgba(124, 92, 252, 0.4);
+      box-shadow: 0 8px 30px rgba(109, 74, 255, 0.08);
+    }
+    .dropzone-dash {
+      background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='12' ry='12' stroke='%23383E4BFF' stroke-width='2' stroke-dasharray='8%2c 8' stroke-dashoffset='0' stroke-linecap='square'/%3e%3c/svg%3e");
+    }
+    html {
+      scroll-behavior: smooth;
+    }
+  </style>
+</head>
+<body class="relative min-h-screen flex flex-col justify-between selection:bg-accent selection:text-white">
+
+  <div class="glow-effect"></div>
+
+  <!-- Top Announcement Bar -->
+  <div class="bg-gradient-to-r from-accent/20 via-accentHover/20 to-accent/20 border-b border-accent/20 text-xs py-2 px-4 text-center text-accentLight font-medium z-50">
+    Available now on Gumroad.
+  </div>
+
+  <!-- Navigation -->
+  <header class="sticky top-0 z-40 bg-bgDark/80 backdrop-blur-md border-b border-borderDark/60 transition-all">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+      <!-- Logo -->
+      <a href="#" class="flex items-center gap-2.5 group">
+        <img src="images/logo.png" alt="FileForge Logo" class="w-8 h-8 object-contain group-hover:scale-105 transition-transform" onerror="this.style.display='none'">
+        <span class="font-bold text-lg text-white tracking-tight group-hover:text-accentLight transition-colors">FileForge</span>
+      </a>
+
+      <!-- Desktop Nav Links -->
+      <nav class="hidden md:flex items-center gap-8 text-sm text-textMuted font-medium">
+        <a href="#features" class="hover:text-white transition-colors">Features</a>
+        <a href="#formats" class="hover:text-white transition-colors">Supported Formats</a>
+        <a href="#faq" class="hover:text-white transition-colors">FAQ</a>
+      </nav>
+
+      <!-- Buy CTA -->
+      <div>
+        <a href="https://wasivis.gumroad.com/l/ljqcxh" target="_blank" rel="noopener noreferrer" 
+           class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-accent hover:bg-accentHover text-white text-sm font-semibold transition-all shadow-md shadow-accent/20 hover:shadow-accent/40 hover:-translate-y-0.5">
+          <span>Buy on Gumroad</span>
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content Container -->
+  <main class="relative z-10 flex-grow">
+
+    <!-- Hero Section -->
+    <section class="max-w-5xl mx-auto px-4 sm:px-6 pt-16 pb-20 text-center">
+      <!-- Badge -->
+      <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-cardDark border border-borderDark text-xs font-medium text-textMuted mb-6">
+        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+        <span>Version 1.0 Ready • Windows / macOS / Linux</span>
+      </div>
+
+      <!-- Main Headline -->
+      <h1 class="text-4xl sm:text-6xl font-extrabold text-white tracking-tight leading-tight sm:leading-none max-w-4xl mx-auto">
+        Fast, Offline Batch <br class="hidden sm:inline" />
+        <span class="bg-clip-text text-transparent bg-gradient-to-r from-white via-slate-200 to-accentLight">File Conversion.</span>
+      </h1>
+
+      <!-- Subtitle -->
+      <p class="mt-6 text-lg sm:text-xl text-textMuted max-w-2xl mx-auto font-normal leading-relaxed">
+        100% offline desktop converter. Process hundreds of images, audio tracks, videos, and documents in seconds with zero cloud uploads or subscription fees.
+      </p>
+
+      <!-- CTA Action Buttons -->
+      <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a href="https://wasivis.gumroad.com/l/ljqcxh" target="_blank" rel="noopener noreferrer" 
+           class="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-accent hover:bg-accentHover text-white font-semibold text-base transition-all shadow-lg shadow-accent/25 hover:shadow-accent/40 hover:-translate-y-0.5 text-center">
+          Buy on Gumroad — $9.99
+        </a>
+        <a href="#features" 
+           class="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-cardDark hover:bg-borderDark text-slate-200 border border-borderDark font-medium text-base transition-all text-center">
+          Explore Features
+        </a>
+      </div>
+
+      <!-- Trust Badges -->
+      <div class="mt-8 flex items-center justify-center gap-6 text-xs text-textMuted font-medium">
+        <span class="flex items-center gap-1.5">
+          <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+          No Cloud Uploads
+        </span>
+        <span class="flex items-center gap-1.5">
+          <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+          One-Time Purchase
+        </span>
+        <span class="flex items-center gap-1.5">
+          <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+          Zero Subscriptions
+        </span>
+      </div>
+
+      <!-- High-Fidelity Desktop App Screenshot -->
+      <div class="mt-14 max-w-4xl mx-auto rounded-2xl bg-cardDark border border-borderDark shadow-2xl shadow-black/80 overflow-hidden text-left">
+        
+        <!-- App Titlebar -->
+        <div class="bg-[#15171B] px-4 py-3 border-b border-borderDark/80 flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <div class="w-3 h-3 rounded-full bg-red-500/80"></div>
+            <div class="w-3 h-3 rounded-full bg-yellow-500/80"></div>
+            <div class="w-3 h-3 rounded-full bg-green-500/80"></div>
+            <span class="ml-3 text-xs text-textMuted font-mono">FileForge — Desktop Utility v1.0</span>
+          </div>
+          <div class="text-xs text-textMuted/60 font-mono">Native Desktop Engine</div>
+        </div>
+
+        <!-- App Screenshot Container -->
+        <div class="bg-bgDark/60">
+          <img src="images/fileforge.png" alt="FileForge App Screenshot" class="w-full h-auto block" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'800\' height=\'450\' viewBox=\'0 0 800 450\'><rect width=\'100%\' height=\'100%\' fill=\'%23181B20\'/><text x=\'50%\' y=\'50%\' fill=\'%2364748B\' font-family=\'sans-serif\' font-size=\'18\' text-anchor=\'middle\'>Place your screenshot at images/fileforge.png</text></svg>'">
+        </div>
+      </div>
+    </section>
+
+    <!-- Key Features Grid -->
+    <section id="features" class="max-w-6xl mx-auto px-4 sm:px-6 py-20 border-t border-borderDark/40">
+      <div class="text-center max-w-2xl mx-auto mb-16">
+        <h2 class="text-xs font-bold text-accentLight uppercase tracking-widest mb-3">Engineered For Efficiency</h2>
+        <p class="text-3xl font-extrabold text-white tracking-tight sm:text-4xl">Everything you need. Nothing you don't.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        
+        <!-- Feature 1 -->
+        <div class="p-6 rounded-2xl bg-cardDark card-border flex flex-col justify-between">
+          <div>
+            <div class="w-10 h-10 rounded-xl bg-accent/10 border border-accent/20 flex items-center justify-center text-accentLight mb-5">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+              </svg>
+            </div>
+            <h3 class="text-lg font-bold text-white mb-2">100% Offline & Private</h3>
+            <p class="text-sm text-textMuted leading-relaxed">
+              No server uploads, cloud queues, or file size limits. Your sensitive documents, images, and videos stay strictly on your local machine.
+            </p>
+          </div>
+        </div>
+
+        <!-- Feature 2 -->
+        <div class="p-6 rounded-2xl bg-cardDark card-border flex flex-col justify-between">
+          <div>
+            <div class="w-10 h-10 rounded-xl bg-accent/10 border border-accent/20 flex items-center justify-center text-accentLight mb-5">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+              </svg>
+            </div>
+            <h3 class="text-lg font-bold text-white mb-2">Multi-Threaded Speed</h3>
+            <p class="text-sm text-textMuted leading-relaxed">
+              Utilizes all CPU cores to convert hundreds of files concurrently in seconds. Say goodbye to waiting for online web tools to upload.
+            </p>
+          </div>
+        </div>
+
+        <!-- Feature 3 -->
+        <div class="p-6 rounded-2xl bg-cardDark card-border flex flex-col justify-between">
+          <div>
+            <div class="w-10 h-10 rounded-xl bg-accent/10 border border-accent/20 flex items-center justify-center text-accentLight mb-5">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+              </svg>
+            </div>
+            <h3 class="text-lg font-bold text-white mb-2">Smart Format Detection</h3>
+            <p class="text-sm text-textMuted leading-relaxed">
+              FileForge automatically parses dropped files and suggests optimal target extensions and codecs for maximum compression and clarity.
+            </p>
+          </div>
+        </div>
+
+        <!-- Feature 4 -->
+        <div class="p-6 rounded-2xl bg-cardDark card-border flex flex-col justify-between">
+          <div>
+            <div class="w-10 h-10 rounded-xl bg-accent/10 border border-accent/20 flex items-center justify-center text-accentLight mb-5">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path>
+              </svg>
+            </div>
+            <h3 class="text-lg font-bold text-white mb-2">Native & Lightweight</h3>
+            <p class="text-sm text-textMuted leading-relaxed">
+              Built with native GUI libraries instead of heavy browser wrappers. Instant startup, under 50MB RAM footprint, dark mode tuned.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Supported Formats Section -->
+    <section id="formats" class="max-w-6xl mx-auto px-4 sm:px-6 py-20 border-t border-borderDark/40">
+      <div class="text-center max-w-2xl mx-auto mb-16">
+        <h2 class="text-xs font-bold text-accentLight uppercase tracking-widest mb-3">Unmatched Versatility</h2>
+        <p class="text-3xl font-extrabold text-white tracking-tight sm:text-4xl">20+ Popular Formats Supported</p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        
+        <!-- Category: Images -->
+        <div class="p-6 rounded-2xl bg-cardDark border border-borderDark/60">
+          <div class="flex items-center gap-3 mb-4">
+            <span class="p-2 rounded-lg bg-blue-500/10 text-blue-400">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+            </span>
+            <h3 class="text-base font-bold text-white">Images</h3>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-2.5 py-1 rounded bg-bgDark border border-borderDark text-xs font-mono text-slate-300">PNG</span>
+            <span class="px-2.5 py-1 rounded bg-bgDark border border-borderDark text-xs font-mono text-slate-300">JPG</span>
+            <span class="px-2.5 py-1 rounded bg-bgDark border border-borderDark text-xs font-mono text-slate-300">WebP</span>
+            <span class="px-2.5 py-1 rounded bg-bgDark border border-borderDark text-xs font-mono text-slate-300">AVIF</span>
+            <span class="px-2.5 py-1 rounded bg-bgDark border border-borderDark text-xs font-mono text-slate-300">GIF</span>
+            <span class="px-2.5 py-1 rounded bg-bgDark border border-borderDark text-xs font-mono text-slate-300">ICO</span>
+            <span class="px-2.5 py-1 rounded bg-bgDark border border-borderDark text-xs font-mono text-slate-300">BMP</span>
+            <span class="px-2.5 py-1 rounded bg-bgDark border border-borderDark text-xs font-mono text-slate-300">TIFF</span>
+          </div>
+        </div>
+
+        <!-- Category: Audio -->
+        <div class="p-6 rounded-2xl bg-cardDark border border-borderDark/60">
+          <div class="flex items-center gap-3 mb-4">
+            <span class="p-2 rounded-lg bg-purple-500/10 text-purple-400">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-2v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12 0c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-2"></path></svg>
+            </span>
+            <h3 class="text-base font-bold text-white">Audio</h3>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-2.5 py-1 rounded bg-bgDark border border-borderDark text-xs font-mono text-slate-300">MP3</span>
+            <span class="px-2.5 py-1 rounded bg-bgDark border border-borderDark text-xs font-mono text-slate-300">WAV</span>
+            <span class="px-2.5 py-1 rounded bg-bgDark border border-borderDark text-xs font-mono text-slate-300">FLAC</span>
+            <span class="px-2.5 py-1 rounded bg-bgDark border border-borderDark text-xs font-mono text-slate-300">AAC</span>
+            <span class="px-2.5 py-1 rounded bg-bgDark border border-borderDark text-xs font-mono text-slate-300">OGG</span>
+            <span class="px-2.5 py-1 rounded bg-bgDark border border-borderDark text-xs font-mono text-slate-300">M4A</span>
+            <span class="px-2.5 py-1 rounded bg-bgDark border border-borderDark text-xs font-mono text-slate-300">OPUS</span>
+          </div>
+        </div>
+
+        <!-- Category: Video -->
+        <div class="p-6 rounded-2xl bg-cardDark border border-borderDark/60">
+          <div class="flex items-center gap-3 mb-4">
+            <span class="p-2 rounded-lg bg-pink-500/10 text-pink-400">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+            </span>
+            <h3 class="text-base font-bold text-white">Video</h3>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-2.5 py-1 rounded bg-bgDark border border-borderDark text-xs font-mono text-slate-300">MP4</span>
+            <span class="px-2.5 py-1 rounded bg-bgDark border border-borderDark text-xs font-mono text-slate-300">MKV</span>
+            <span class="px-2.5 py-1 rounded bg-bgDark border border-borderDark text-xs font-mono text-slate-300">MOV</span>
+            <span class="px-2.5 py-1 rounded bg-bgDark border border-borderDark text-xs font-mono text-slate-300">WebM</span>
+            <span class="px-2.5 py-1 rounded bg-bgDark border border-borderDark text-xs font-mono text-slate-300">AVI</span>
+            <span class="px-2.5 py-1 rounded bg-bgDark border border-borderDark text-xs font-mono text-slate-300">GIF</span>
+          </div>
+        </div>
+
+        <!-- Category: Documents -->
+        <div class="p-6 rounded-2xl bg-cardDark border border-borderDark/60">
+          <div class="flex items-center gap-3 mb-4">
+            <span class="p-2 rounded-lg bg-emerald-500/10 text-emerald-400">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+            </span>
+            <h3 class="text-base font-bold text-white">Documents & Data</h3>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-2.5 py-1 rounded bg-bgDark border border-borderDark text-xs font-mono text-slate-300">PDF</span>
+            <span class="px-2.5 py-1 rounded bg-bgDark border border-borderDark text-xs font-mono text-slate-300">DOCX</span>
+            <span class="px-2.5 py-1 rounded bg-bgDark border border-borderDark text-xs font-mono text-slate-300">CSV</span>
+            <span class="px-2.5 py-1 rounded bg-bgDark border border-borderDark text-xs font-mono text-slate-300">JSON</span>
+            <span class="px-2.5 py-1 rounded bg-bgDark border border-borderDark text-xs font-mono text-slate-300">XLSX</span>
+            <span class="px-2.5 py-1 rounded bg-bgDark border border-borderDark text-xs font-mono text-slate-300">TXT</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- FAQ Accordion Section -->
+    <section id="faq" class="max-w-4xl mx-auto px-4 sm:px-6 py-20 border-t border-borderDark/40">
+      <div class="text-center mb-12">
+        <h2 class="text-xs font-bold text-accentLight uppercase tracking-widest mb-3">Got Questions?</h2>
+        <p class="text-3xl font-extrabold text-white tracking-tight">Frequently Asked Questions</p>
+      </div>
+
+      <div class="space-y-4">
+        
+        <details class="group bg-cardDark border border-borderDark rounded-xl p-5 [&_summary::-webkit-details-marker]:none">
+          <summary class="flex items-center justify-between font-semibold text-white cursor-pointer list-none">
+            <span>Is FileForge really 100% offline?</span>
+            <span class="transition group-open:rotate-180 text-textMuted">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+            </span>
+          </summary>
+          <p class="mt-4 text-sm text-textMuted leading-relaxed">
+            Yes, absolutely. FileForge runs entirely on your local CPU/GPU using native compiled binaries. No internet connection is required after downloading, and zero byte of your files ever leaves your computer.
+          </p>
+        </details>
+
+        <details class="group bg-cardDark border border-borderDark rounded-xl p-5 [&_summary::-webkit-details-marker]:none">
+          <summary class="flex items-center justify-between font-semibold text-white cursor-pointer list-none">
+            <span>How many files can I convert at once?</span>
+            <span class="transition group-open:rotate-180 text-textMuted">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+            </span>
+          </summary>
+          <p class="mt-4 text-sm text-textMuted leading-relaxed">
+            There are no arbitrary batch limits or file size caps. You can drag and drop entire directories containing thousands of files, and FileForge will queue and process them concurrently using worker threads.
+          </p>
+        </details>
+
+        <details class="group bg-cardDark border border-borderDark rounded-xl p-5 [&_summary::-webkit-details-marker]:none">
+          <summary class="flex items-center justify-between font-semibold text-white cursor-pointer list-none">
+            <span>What desktop platforms are supported?</span>
+            <span class="transition group-open:rotate-180 text-textMuted">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+            </span>
+          </summary>
+          <p class="mt-4 text-sm text-textMuted leading-relaxed">
+            FileForge runs natively on Windows 10/11. macOS and Linux coming soon!
+          </p>
+        </details>
+
+        <details class="group bg-cardDark border border-borderDark rounded-xl p-5 [&_summary::-webkit-details-marker]:none">
+          <summary class="flex items-center justify-between font-semibold text-white cursor-pointer list-none">
+            <span>Is this a monthly subscription?</span>
+            <span class="transition group-open:rotate-180 text-textMuted">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+            </span>
+          </summary>
+          <p class="mt-4 text-sm text-textMuted leading-relaxed">
+            No. FileForge is a one-time purchase. Buy it once on Gumroad and enjoy lifetime desktop updates with no hidden fees or monthly charges.
+          </p>
+        </details>
+
+      </div>
+    </section>
+
+    <!-- Bottom Call-To-Action Banner -->
+    <section class="max-w-5xl mx-auto px-4 sm:px-6 py-20">
+      <div class="relative rounded-3xl bg-gradient-to-br from-cardDark via-[#1C2027] to-cardDark border border-borderDark p-8 sm:p-12 text-center overflow-hidden shadow-2xl">
+        <div class="absolute -top-24 -right-24 w-64 h-64 bg-accent/20 rounded-full blur-3xl pointer-events-none"></div>
+        
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+          Ready for Frictionless File Conversion?
+        </h2>
+        <p class="mt-4 text-base text-textMuted max-w-xl mx-auto">
+          Take full control over your digital assets. Get lifetime access to FileForge today.
+        </p>
+        <div class="mt-8">
+          <a href="https://wasivis.gumroad.com/l/ljqcxh" target="_blank" rel="noopener noreferrer" 
+             class="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-accent hover:bg-accentHover text-white font-bold text-base transition-all shadow-xl shadow-accent/25 hover:shadow-accent/40 hover:-translate-y-0.5">
+            <span>Get FileForge for Desktop</span>
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+            </svg>
+          </a>
+        </div>
+        <p class="mt-4 text-xs text-textMuted/70">Instant digital download via Gumroad • 100% money-back guarantee</p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t border-borderDark/60 bg-bgDark py-10 relative z-10">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-textMuted">
+      <div class="flex items-center gap-2">
+        <span class="font-semibold text-white">FileForge</span>
+        <span>© 2026. All rights reserved.</span>
+      </div>
+      <div class="text-center sm:text-right text-textMuted/80">
+        FileForge runs entirely on your local device. We collect 0 data.
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
